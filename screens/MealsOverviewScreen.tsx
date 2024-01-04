@@ -1,27 +1,31 @@
-import { Image, StyleSheet, Text, View } from "react-native";
+import { FlatList, StyleSheet, Text, View } from "react-native";
 import { MEALS } from "../data/data";
+import MealsList from "../components/MealsList";
+import { useLayoutEffect } from "react";
 
-const MealsOverviewScreen = ({ route }: any) => {
-  const { categoryId } = route.params;
+const MealsOverviewScreen = ({ route, navigation }: any) => {
+  const { categoryId, name } = route.params;
+
+  // setting options for this screen
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      title: name,
+    });
+  }, [navigation, name]);
+
   const displayMeals = MEALS.filter((meal) => {
     return meal.categoryIds.includes(categoryId);
   });
 
-  console.log(displayMeals);
-
   return (
     <View style={styles.rootScreen}>
-      <Image
-        source={{ uri: displayMeals[0].imageUrl }}
-        width={300}
-        height={300}
+      <FlatList
+        data={displayMeals}
+        keyExtractor={(item) => item.id}
+        renderItem={(itemData) => <MealsList displayMeals={itemData.item} />}
+        showsVerticalScrollIndicator={false}
+        ItemSeparatorComponent={() => <View style={styles.separator} />}
       />
-      <Text>{displayMeals[0].title}</Text>
-      <Text>{displayMeals[0].affordability}</Text>
-      <Text>{displayMeals[0].complexity}</Text>
-      <Text>
-        {displayMeals[0].isVegetarian ? "Vegetarian" : "Non-vegetarian"}
-      </Text>
     </View>
   );
 };
@@ -33,5 +37,11 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
+  },
+  separator: {
+    borderColor: "#000",
+    borderWidth: 1,
+    marginVertical: 20,
+    marginHorizontal: 15,
   },
 });

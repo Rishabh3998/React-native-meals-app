@@ -1,11 +1,12 @@
-import { FlatList, ScrollView, StyleSheet, View } from "react-native";
+import { FlatList, StyleSheet, View } from "react-native";
 import Card from "../components/Card";
 import { CATEGORIES } from "../data/data";
 
 const CategoriesScreen = ({ navigation }: any) => {
-  const handlePress = (id: string) => {
+  const handlePress = (id: string, title: string) => {
     navigation.navigate("Meals", {
       categoryId: id,
+      name: title,
     });
   };
 
@@ -18,7 +19,7 @@ const CategoriesScreen = ({ navigation }: any) => {
           <Card
             title={item.title}
             color={item.color}
-            onPress={() => handlePress(item.id)}
+            onPress={() => handlePress(item.id, item.title)}
           />
         )}
         numColumns={2}
