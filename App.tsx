@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import { SafeAreaView, StyleSheet } from "react-native";
+import { Pressable, SafeAreaView, StyleSheet, Text } from "react-native";
 import CategoriesScreen from "./screens/CategoriesScreen";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -42,9 +42,21 @@ const App = () => {
           <Stack.Screen
             name="Meal Info"
             component={MealInfo}
-            options={{
-              title: "Meal details",
-            }}
+            // options={{
+            //   title: "Meal details",
+            // headerRight: () => {
+            //   let color = "#fff";
+            //   return (
+            //     <Pressable
+            //       onPress={() => {
+            //         color = "red";
+            //       }}
+            //     >
+            //       <Ionicons name="heart" size={24} color={color} />
+            //     </Pressable>
+            //   );
+            // },
+            // }}
           />
         </Stack.Navigator>
       </NavigationContainer>
