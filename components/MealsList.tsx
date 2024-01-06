@@ -42,10 +42,10 @@ const styles = StyleSheet.create({
   },
   iosPressed: {
     opacity: 0.75,
-    color: "#B6BBC4",
+    color: "#756AB6",
   },
   itemContainer: {
-    backgroundColor: "#B6BBC4",
+    backgroundColor: "#756AB6",
     padding: 20,
     margin: 15,
     borderRadius: 20,
@@ -69,9 +69,11 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
     textAlign: "center",
     fontWeight: "bold",
+    color: "#fff",
   },
   subTitle: {
     fontSize: 14,
     fontWeight: "500",
+    color: "#fff",
   },
 });

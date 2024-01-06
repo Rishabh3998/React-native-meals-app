@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
   subList: {
     flex: 1,
     fontSize: 15,
-    backgroundColor: "#f5d142",
+    backgroundColor: "#BEADFA",
     padding: 10,
     marginVertical: 8,
     marginHorizontal: 10,

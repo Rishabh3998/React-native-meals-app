@@ -1,9 +1,21 @@
 import { Pressable, StyleSheet, Text, View, Platform } from "react-native";
+
+// Notes:
+// Since this is not a screen component hence we will not get props like route and navigation
+// from navigator therefore we have to use useNavigation() hook to do the navigation via name
+// of the navigator and passing params, and we can setOptions too.
+
 // import { useNavigation } from "@react-navigation/native";
+// const navigate = useNavigation();
+// onPress={() =>
+//   navigate.navigate("Meal Info", {
+//     displayMeals: displayMeals,
+//   })
+// }
+
+// we can use this hook if we want to navigate from a nested component which is not a screen
 
 const Card = ({ title, color, onPress }: any) => {
-  // const navigate = useNavigation();
-  // we can use this hook if we want to navigate from a nested component which is not a screen
   return (
     <View style={[styles.container, { backgroundColor: color }]}>
       <Pressable
@@ -31,7 +43,7 @@ const styles = StyleSheet.create({
     flex: 1,
     height: 150,
     margin: 16,
-    borderRadius: 10,
+    borderRadius: 30,
     elevation: 4,
     shadowColor: "#000",
     shadowOpacity: 0.25,
@@ -56,5 +68,6 @@ const styles = StyleSheet.create({
   buttonPressedIOS: {
     opacity: 0.25,
     overflow: "hidden",
+    borderRadius: 30,
   },
 });
