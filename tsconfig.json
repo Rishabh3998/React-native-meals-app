@@ -8,6 +8,7 @@
     "**/*.tsx",
     "models/meal.ts",
     "models/category.ts",
-    "data/data.ts"
+    "data/data.ts",
+    "store/context/favorites-context.tsx"
   ]
 }

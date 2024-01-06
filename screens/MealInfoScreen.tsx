@@ -1,4 +1,4 @@
-import { useLayoutEffect, useState } from "react";
+import { useContext, useLayoutEffect, useState } from "react";
 import {
   Image,
   Pressable,
@@ -8,27 +8,43 @@ import {
   View,
 } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import { FavoritesContext } from "../store/context/favorites-context";
 
 const MealInfo = ({ route, navigation }: any) => {
+  const favoriteMealCtx = useContext(FavoritesContext);
   const { displayMeals } = route.params;
-  const [color, setColor] = useState("#fff");
+  const mealId: string = displayMeals?.id;
+
+  const isFavorite: boolean = favoriteMealCtx.ids.includes(mealId);
+
+  const handleFavorite = () => {
+    if (isFavorite) {
+      favoriteMealCtx.removeFavorite(mealId);
+    } else {
+      favoriteMealCtx.addFavorite(mealId);
+    }
+  };
 
   useLayoutEffect(() => {
     navigation.setOptions({
       title: "Meal details",
       headerRight: () => {
         return (
-          <Pressable onPress={() => setColor("red")}>
-            <Ionicons name="heart" size={24} color={color} />
+          <Pressable onPress={handleFavorite}>
+            <Ionicons
+              name="heart"
+              size={24}
+              color={isFavorite ? "red" : "white"}
+            />
           </Pressable>
         );
       },
     });
-  }, [color, navigation]);
+  }, [isFavorite, navigation]);
 
   return (
     <View style={styles.rootScreen}>
-      <View style={styles.shadowContainer}>
+      <View>
         <Image
           source={{ uri: displayMeals.imageUrl }}
           width={250}
@@ -114,13 +130,6 @@ const styles = StyleSheet.create({
   },
   scrollContainer: {
     marginBottom: 10,
-  },
-  shadowContainer: {
-    elevation: 4,
-    shadowColor: "#000",
-    shadowOffset: { width: 4, height: 8 },
-    shadowOpacity: 0.25,
-    shadowRadius: 8,
   },
   textShadow: {
     padding: 15,
