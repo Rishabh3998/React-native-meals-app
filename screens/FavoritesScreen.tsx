@@ -3,13 +3,15 @@ import { MEALS } from "../data/data";
 import { useContext } from "react";
 import { FavoritesContext } from "../store/context/favorites-context";
 import MealsList from "../components/MealsList";
+import { useSelector } from "react-redux";
 
 const FavoritesScreen = () => {
-  const favoriteMealCtx = useContext(FavoritesContext);
-  const favorites = favoriteMealCtx.ids;
-  console.log({ favorites });
+  // const favoriteMealCtx = useContext(FavoritesContext);
+  const favoriteMealIds = useSelector((state: any) => state.favoriteMeals.ids);
+  // const favorites = favoriteMealCtx.ids; // From react context API
+  const favorites = favoriteMealIds; // From redux store
 
-  const displayMeals = MEALS.filter((meal) => favorites.includes(meal.id));
+  const displayMeals = MEALS.filter((meal) => favorites?.includes(meal.id));
 
   if (displayMeals.length === 0) {
     return (

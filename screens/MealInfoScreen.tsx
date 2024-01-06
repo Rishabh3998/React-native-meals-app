@@ -9,19 +9,26 @@ import {
 } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { FavoritesContext } from "../store/context/favorites-context";
+import { useSelector, useDispatch } from "react-redux";
+import { addFavorite, removeFavorite } from "../store/redux/favorites";
 
 const MealInfo = ({ route, navigation }: any) => {
-  const favoriteMealCtx = useContext(FavoritesContext);
+  // const favoriteMealCtx = useContext(FavoritesContext);
+  const favoriteMealsIds = useSelector((state: any) => state.favoriteMeals.ids);
+  const dispatch = useDispatch();
   const { displayMeals } = route.params;
   const mealId: string = displayMeals?.id;
 
-  const isFavorite: boolean = favoriteMealCtx.ids.includes(mealId);
+  // const isFavorite: boolean = favoriteMealCtx.ids.includes(mealId);
+  const isFavorite: boolean = favoriteMealsIds.includes(mealId);
 
   const handleFavorite = () => {
     if (isFavorite) {
-      favoriteMealCtx.removeFavorite(mealId);
+      // favoriteMealCtx.removeFavorite(mealId);
+      dispatch(removeFavorite({ id: mealId }));
     } else {
-      favoriteMealCtx.addFavorite(mealId);
+      // favoriteMealCtx.addFavorite(mealId);
+      dispatch(addFavorite({ id: mealId }));
     }
   };
 
